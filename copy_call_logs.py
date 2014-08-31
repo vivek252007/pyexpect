@@ -12,7 +12,7 @@ def scp_server(server,passwrd,expect_line,log_ext):
 	print "login_sa for scp"
 	ssh,chan = login_admin()
 	chan.send("scp "+server+":/tmp/call_logs"+log_ext+" /tmp/\n")
-	print "scp to xc2-beta.pbeta.ooma.com"
+	print "copying file"
 	buff = ''
 	while not buff.endswith(server+"'s password: "):
 		resp = chan.recv(9999)
@@ -38,9 +38,9 @@ def scp_local_machine(log_ext):
 	print "copying the file to the Desktop"
 	time.sleep(2)
 	chan.close()
-	foo = pexpect.spawn('ssh root@172.16.0.10 rm /tmp/call_logs'+log_ext)
+	foo = pexpect.spawn('TO REMOTE IP'+log_ext)
 	print "ssh to admin to remove file"
-	foo.expect("root@172.16.0.10's password: ")
+	foo.expect(" Expected line for eg. password: ")
 	foo.sendline('YOUR PASSWORD')
 	print "password entered"
 	foo.expect(pexpect.EOF)
